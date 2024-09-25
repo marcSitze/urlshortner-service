@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dns = require("dns");
+const isUrlHttp = require("is-url-http");
 
 const app = express();
 
@@ -33,7 +34,8 @@ app.post("/api/shorturl", (req, res) => {
     return res.json({ error: "invalid url" })
   }
 
-  const isValid = isValidUrl(url)
+  // const isValid = isValidUrl(url)
+  const isValid = isUrlHttp(url);
   if (!isValid) {
     return res.json({ error: "invalid url" })
   }
